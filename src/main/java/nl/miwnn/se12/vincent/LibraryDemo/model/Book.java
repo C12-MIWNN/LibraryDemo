@@ -3,10 +3,7 @@ package nl.miwnn.se12.vincent.LibraryDemo.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,6 +17,7 @@ public class Book {
     @Id @GeneratedValue
     private Long bookId;
 
+    @Column(unique = true)
     private String title;
 
     private String author;

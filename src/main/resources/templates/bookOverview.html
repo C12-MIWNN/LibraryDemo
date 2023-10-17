@@ -16,7 +16,7 @@
         <th>Buy</th>
     </tr>
     <tr th:each="book : ${allBooks}">
-        <td th:text="${book.title}"></td>
+        <td><a th:href="@{/book/detail/{title}(title=${book.title})}" th:text="${book.title}"></a> </td>
         <td th:text="${book.author}"></td>
         <td th:text="${book.numberOfAvailableCopies}"></td>
         <td><a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy copy</a></td>
