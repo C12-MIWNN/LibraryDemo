@@ -9,6 +9,8 @@
 <h1>Create a new book</h1>
 
 <form th:action="@{/book/new}" method="post" th:object="${book}">
+    <input type="hidden" th:field="*{bookId}">
+
     <table>
         <tr>
             <td><label for="titleField">Title</label></td>

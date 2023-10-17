@@ -38,6 +38,19 @@ public class BookController {
         return "bookForm";
     }
 
+    @GetMapping("/book/edit/{title}")
+    private String showEditBookForm(@PathVariable("title") String title, Model model) {
+        Optional<Book> optionalBook = bookRepository.findBookByTitle(title);
+
+        if (optionalBook.isEmpty()) {
+            return "redirect:/book/overview";
+        }
+
+        model.addAttribute("book", optionalBook.get());
+
+        return "bookForm";
+    }
+
     @PostMapping("/book/new")
     private String saveOrUpdateBook(@ModelAttribute("book") Book bookToBeSaved, BindingResult result) {
         if (!result.hasErrors()) {

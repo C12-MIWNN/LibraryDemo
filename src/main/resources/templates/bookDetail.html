@@ -23,6 +23,8 @@
     </tr>
 </table>
 
+<a th:href="@{/book/edit/{title}(title=${bookToBeShown.title})}">Edit</a>
+
 <a th:href="@{/book/overview}">Go to Book overview</a>
 
 <table>
@@ -32,7 +34,12 @@
     </tr>
     <tr th:each="copy : ${bookToBeShown.copies}">
         <td th:text="${copy.copyId}"></td>
-        <td th:text="${copy.available}"></td>
+        <td th:if="${copy.available}">
+            <a th:href="@{/copy/borrow/{copyId}(copyId=${copy.copyId})}">Borrow</a>
+        </td>
+        <td th:unless="${copy.available}">
+            <a th:href="@{/copy/return/{copyId}(copyId=${copy.copyId})}">Return</a>
+        </td>
     </tr>
 </table>
 
