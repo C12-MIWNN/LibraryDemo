@@ -1,14 +1,20 @@
 package nl.miwnn.se12.vincent.LibraryDemo.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * @author Vincent Velthuizen <v.r.velthuizen@pl.hanze.nl>
  * The concept of a book that is available at my library
  */
 @Entity
+@Getter @Setter
 public class Book {
 
     @Id @GeneratedValue
@@ -18,27 +24,18 @@ public class Book {
 
     private String author;
 
-    public Long getBookId() {
-        return bookId;
-    }
+    @OneToMany(mappedBy = "book")
+    private List<Copy> copies;
 
-    public String getTitle() {
-        return title;
-    }
+    public int getNumberOfAvailableCopies() {
+        int count = 0;
 
-    public String getAuthor() {
-        return author;
-    }
+        for (Copy copy : copies) {
+            if (copy.getAvailable()) {
+                count++;
+            }
+        }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+        return count;
     }
 }
