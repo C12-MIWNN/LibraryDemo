@@ -11,12 +11,16 @@
 <form th:action="@{/book/new}" method="post" th:object="${book}">
     <table>
         <tr>
-            <th>Title</th>
-            <th>Author</th>
+            <td><label for="titleField">Title</label></td>
+            <td><label for="authorField">Author</label></td>
         </tr>
         <tr>
-            <td><input type="text" th:field="*{title}" /></td>
-            <td><input type="text" th:field="*{author}" /></td>
+            <td>
+                <input type="text" id="titleField" th:field="*{title}" />
+            </td>
+            <td>
+                <input type="text" id="authorField" th:field="*{author}" />
+            </td>
         </tr>
     </table>
 

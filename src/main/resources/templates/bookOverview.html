@@ -10,16 +10,16 @@
 
 <table>
     <tr>
-        <th>bookId</th>
         <th>title</th>
         <th>author</th>
     </tr>
     <tr th:each="book : ${allBooks}">
-        <td th:text="${book.bookId}"></td>
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
     </tr>
 </table>
+
+<a th:href="@{/book/new}">Add a Book</a>
 
 </body>
 </html>
