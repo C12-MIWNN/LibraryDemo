@@ -51,6 +51,19 @@ public class BookController {
         return "bookForm";
     }
 
+    @GetMapping("/book/delete/{title}")
+    private String deleteBook(@PathVariable("title") String title) {
+        Optional<Book> optionalBook = bookRepository.findBookByTitle(title);
+
+        if (optionalBook.isEmpty()) {
+            return "redirect:/book/overview";
+        }
+
+        bookRepository.delete(optionalBook.get());
+
+        return "redirect:/book/overview";
+    }
+
     @PostMapping("/book/new")
     private String saveOrUpdateBook(@ModelAttribute("book") Book bookToBeSaved, BindingResult result) {
         if (!result.hasErrors()) {

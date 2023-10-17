@@ -23,9 +23,17 @@
     </tr>
 </table>
 
-<a th:href="@{/book/edit/{title}(title=${bookToBeShown.title})}">Edit</a>
+<p>
+    <a th:href="@{/book/edit/{title}(title=${bookToBeShown.title})}">Edit</a>
+</p>
 
-<a th:href="@{/book/overview}">Go to Book overview</a>
+<p>
+    <a th:href="@{/book/delete/{title}(title=${bookToBeShown.title})}">Delete</a>
+</p>
+
+<p>
+    <a th:href="@{/book/overview}">Go to Book overview</a>
+</p>
 
 <table>
     <tr>
