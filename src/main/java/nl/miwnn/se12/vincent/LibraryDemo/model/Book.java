@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,20 +13,32 @@ import java.util.Set;
  * The concept of a book that is available at my library
  */
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Book {
 
-    @Id @GeneratedValue
+    public Book(String title) {
+        this.title = title;
+    }
+
+    public Book() {
+    }
+
+    @Id@GeneratedValue
     private Long bookId;
 
     @Column(unique = true)
     private String title;
 
     @ManyToMany
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     @OneToMany(mappedBy = "book")
     private Set<Copy> copies;
+
+    public void addAuthor(Author author) {
+        authors.add(author);
+    }
 
     public int getNumberOfAvailableCopies() {
         int count = 0;

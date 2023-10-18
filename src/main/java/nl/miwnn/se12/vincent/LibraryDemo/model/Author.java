@@ -1,5 +1,6 @@
 package nl.miwnn.se12.vincent.LibraryDemo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,19 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 public class Author {
+
+    public Author(String firstName, String infixName, String lastName) {
+        this.firstName = firstName;
+        this.infixName = infixName;
+        this.lastName = lastName;
+    }
+
+    public Author(String firstName, String lastName) {
+        this(firstName, null, lastName);
+    }
+
+    public Author() {
+    }
 
     @Id @GeneratedValue
     private Long authorId;

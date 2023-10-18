@@ -16,6 +16,12 @@ import javax.persistence.ManyToOne;
 @Getter @Setter
 public class Copy {
 
+    public Copy(Book book) {
+        this.book = book;
+    }
+
+    public Copy() {}
+
     @Id @GeneratedValue
     private Long copyId;
 
