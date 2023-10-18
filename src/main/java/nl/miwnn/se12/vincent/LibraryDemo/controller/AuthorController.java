@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthorController {
     private final AuthorRepository authorRepository;
 
-    @GetMapping("/all")
+    @GetMapping("/overview")
     protected String showAuthorOverview(Model model) {
         model.addAttribute("allAuthors", authorRepository.findAll());
         model.addAttribute("newAuthor", new Author());
@@ -34,6 +34,6 @@ public class AuthorController {
             authorRepository.save(author);
         }
 
-        return "redirect:/author/all";
+        return "redirect:/author/overview";
     }
 }

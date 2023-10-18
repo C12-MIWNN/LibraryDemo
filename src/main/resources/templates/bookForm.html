@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Create a new book</title>
 </head>
 <body>
 
-<h1>Create a new book</h1>
+<div th:replace="fragments/general :: navbar"></div>
 
-<form th:action="@{/book/new}" method="post" th:object="${book}">
-    <input type="hidden" th:field="*{bookId}">
+<div class="container">
+    <h1>Create a new book</h1>
 
-    <table>
-        <tr>
-            <td><label for="titleField">Title</label></td>
-            <td><label for="authorField">Author</label></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" id="titleField" th:field="*{title}" />
-            </td>
-            <td>
-                <select id="authorField" th:field="*{authors}" multiple>
-                    <option th:each="author : ${allAuthors}"
-                            th:value="${author.authorId}"
-                            th:text="${author.displayName}">
-                    </option>
-                </select>
-            </td>
-        </tr>
-    </table>
+    <form th:action="@{/book/new}" method="post" th:object="${book}">
+        <input type="hidden" th:field="*{bookId}">
 
-    <input type="submit" value="Save book" />
-</form>
+        <table>
+            <tr>
+                <td><label for="titleField">Title</label></td>
+                <td><label for="authorField">Author</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="titleField" th:field="*{title}" />
+                </td>
+                <td>
+                    <select id="authorField" th:field="*{authors}" multiple>
+                        <option th:each="author : ${allAuthors}"
+                                th:value="${author.authorId}"
+                                th:text="${author.displayName}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Save book" />
+    </form>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
 </body>
 </html>

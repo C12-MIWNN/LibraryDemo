@@ -34,7 +34,7 @@ public class CopyController {
             copyRepository.save(copy);
         }
 
-        return "redirect:/";
+        return "redirect:/book/overview";
     }
 
     @GetMapping("/borrow/{copyId}")

@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Overview of all books</title>
 </head>
 <body>
 
-<h1>Overview of all books</h1>
+<div th:replace="fragments/general :: navbar"></div>
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Available Copies</th>
-        <th>Buy</th>
-    </tr>
-    <tr th:each="book : ${allBooks}">
-        <td><a th:href="@{/book/detail/{title}(title=${book.title})}" th:text="${book.title}"></a> </td>
-        <td th:text="${book.allAuthorsDisplayString}"></td>
-        <td th:text="${book.numberOfAvailableCopies}"></td>
-        <td><a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy copy</a></td>
-    </tr>
-</table>
+<div class="container">
+    <h1>Overview of all books</h1>
 
-<a th:href="@{/book/new}">Add a Book</a>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Available Copies</th>
+            <th>Buy</th>
+        </tr>
+        <tr th:each="book : ${allBooks}">
+            <td><a th:href="@{/book/detail/{title}(title=${book.title})}" th:text="${book.title}"></a> </td>
+            <td th:text="${book.allAuthorsDisplayString}"></td>
+            <td th:text="${book.numberOfAvailableCopies}"></td>
+            <td><a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy copy</a></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/book/new}">Add a Book</a>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>

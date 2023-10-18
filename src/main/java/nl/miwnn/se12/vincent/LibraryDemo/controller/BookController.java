@@ -80,7 +80,7 @@ public class BookController {
         Optional<Book> optionalBook = bookRepository.findBookByTitle(title);
 
         if (optionalBook.isEmpty()) {
-            return "redirect:/";
+            return "redirect:/book/overview";
         }
 
         model.addAttribute("bookToBeShown", optionalBook.get());
