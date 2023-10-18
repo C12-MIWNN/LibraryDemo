@@ -1,6 +1,8 @@
 package nl.miwnn.se12.vincent.LibraryDemo.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.miwnn.se12.vincent.LibraryDemo.model.Book;
+import nl.miwnn.se12.vincent.LibraryDemo.repository.AuthorRepository;
 import nl.miwnn.se12.vincent.LibraryDemo.repository.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,10 @@ import java.util.Optional;
  * Handle all requests related to books
  */
 @Controller
+@RequiredArgsConstructor
 public class BookController {
+    private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
-
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     @GetMapping({"/", "/book/overview"})
     private String showBookOverview(Model model) {
@@ -34,6 +34,7 @@ public class BookController {
     @GetMapping("/book/new")
     private String showBookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("allAuthors", authorRepository.findAll());
 
         return "bookForm";
     }
@@ -47,6 +48,7 @@ public class BookController {
         }
 
         model.addAttribute("book", optionalBook.get());
+        model.addAttribute("allAuthors", authorRepository.findAll());
 
         return "bookForm";
     }
