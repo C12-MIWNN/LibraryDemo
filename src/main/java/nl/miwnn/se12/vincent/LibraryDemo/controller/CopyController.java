@@ -9,6 +9,7 @@ import nl.miwnn.se12.vincent.LibraryDemo.repository.CopyRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
@@ -17,12 +18,13 @@ import java.util.Optional;
  * Handle everything regarding copies
  */
 @Controller
+@RequestMapping("/copy")
 @RequiredArgsConstructor
 public class CopyController {
     private final BookRepository bookRepository;
     private final CopyRepository copyRepository;
 
-    @GetMapping("/copy/new/{bookId}")
+    @GetMapping("/new/{bookId}")
     private String createNewCopy(@PathVariable("bookId") Long bookId) {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
 
@@ -35,12 +37,12 @@ public class CopyController {
         return "redirect:/";
     }
 
-    @GetMapping("/copy/borrow/{copyId}")
+    @GetMapping("/borrow/{copyId}")
     private String makeCopyUnavailable(@PathVariable("copyId") Long copyId) {
         return setAvailabilityForCopyAndRedirectToBook(copyId, false);
     }
 
-    @GetMapping("/copy/return/{copyId}")
+    @GetMapping("/return/{copyId}")
     private String makeCopyAvailable(@PathVariable("copyId") Long copyId) {
         return setAvailabilityForCopyAndRedirectToBook(copyId, true);
     }

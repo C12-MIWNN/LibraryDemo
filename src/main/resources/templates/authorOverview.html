@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Author Overview</title>
+</head>
+<body>
+
+<h1>Overview of all the authors known in the library</h1>
+
+<table>
+    <tr>
+        <th>First name</th>
+        <th>Infix name</th>
+        <th>Last name</th>
+        <th></th>
+    </tr>
+    <tr th:each="author : ${allAuthors}">
+        <td th:text="${author.firstName}"></td>
+        <td th:text="${author.infixName}"></td>
+        <td th:text="${author.lastName}"></td>
+        <td></td>
+    </tr>
+    <form th:action="@{/author/new}" method="post" th:object="${newAuthor}">
+        <tr>
+            <td><input type="text" th:field="*{firstName}"></td>
+            <td><input type="text" th:field="*{infixName}"></td>
+            <td><input type="text" th:field="*{lastName}"></td>
+            <td><input type="submit" value="Save new author"></td>
+        </tr>
+    </form>
+
+</table>
+</body>
+</html>
