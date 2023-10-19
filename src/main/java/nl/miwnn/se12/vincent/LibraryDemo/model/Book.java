@@ -33,7 +33,7 @@ public class Book {
     @ManyToMany
     private Set<Author> authors = new HashSet<>();
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Copy> copies;
 
     public void addAuthor(Author author) {
