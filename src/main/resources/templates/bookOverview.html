@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Overview of all books</title>
 </head>
@@ -15,13 +15,13 @@
             <th>Title</th>
             <th>Author</th>
             <th>Available Copies</th>
-            <th>Buy</th>
+            <th sec:authorize="isAuthenticated()">Buy</th>
         </tr>
         <tr th:each="book : ${allBooks}">
             <td><a th:href="@{/book/detail/{title}(title=${book.title})}" th:text="${book.title}"></a> </td>
             <td th:text="${book.allAuthorsDisplayString}"></td>
             <td th:text="${book.numberOfAvailableCopies}"></td>
-            <td><a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy copy</a></td>
+            <td sec:authorize="isAuthenticated()"><a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy copy</a></td>
         </tr>
     </table>
 
